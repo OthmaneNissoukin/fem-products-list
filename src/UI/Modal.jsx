@@ -81,7 +81,7 @@ function Window({ children }) {
   const ref = useRef(null);
   useEffect(() => {
     function clickHandler(e) {
-      console.log(e.target.contains(ref.current) && e.target !== ref.current);
+      if (e.target.contains(ref.current) && e.target !== ref.current) closeModal();
     }
 
     if (!ref.current) return;
