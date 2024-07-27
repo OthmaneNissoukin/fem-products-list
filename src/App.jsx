@@ -4,7 +4,7 @@ import styled from "styled-components";
 import CartContextProvider from "./Context/CartContext";
 
 const StyledContainer = styled.main`
-  padding: 24px 12px;
+  padding: 64px 48px;
   max-width: 1270px;
   margin: auto;
   display: grid;
@@ -13,7 +13,7 @@ const StyledContainer = styled.main`
   grid-template-columns: 2fr minmax(370px, 1fr);
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    padding: 64px 48px;
+    padding: 24px 12px;
   }
 `;
 
