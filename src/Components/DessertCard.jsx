@@ -5,8 +5,11 @@ import { useCartContext } from "../Context/CartContext";
 
 const ProductImg = styled.img`
   width: 100%;
-  aspect-ratio: 1 / 1;
   border-radius: 12px;
+
+  @media (min-width: 650px) {
+    aspect-ratio: 1 / 1;
+  }
 `;
 
 const ImageHolder = styled.div`
