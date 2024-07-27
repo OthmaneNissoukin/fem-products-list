@@ -1,5 +1,6 @@
-import { cloneElement, createContext, useContext, useState } from "react";
+import { cloneElement, createContext, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { createPortal } from "react-dom";
 
 const Overlay = styled.div`
   position: fixed;
@@ -75,13 +76,26 @@ function Confirm({ children }) {
 }
 
 function Window({ children }) {
-  const { isOpen } = useContext(ModalContext);
+  const { isOpen, closeModal } = useContext(ModalContext);
+
+  const ref = useRef(null);
+  useEffect(() => {
+    function clickHandler(e) {
+      console.log(e.target.contains(ref.current) && e.target !== ref.current);
+    }
+
+    if (!ref.current) return;
+    document.addEventListener("click", clickHandler);
+
+    return () => document.removeEventListener("click", clickHandler);
+  }, [closeModal]);
 
   if (!isOpen) return null;
-  return (
+  return createPortal(
     <Overlay>
-      <ModalWindow>{children}</ModalWindow>
-    </Overlay>
+      <ModalWindow ref={ref}>{children}</ModalWindow>
+    </Overlay>,
+    document.getElementById("root")
   );
 }
 
